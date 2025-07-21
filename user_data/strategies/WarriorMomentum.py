@@ -79,7 +79,7 @@ class WarriorMomentum(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
     minimal_roi = {
-        "0": 0.50,  # Increased ROI target to be more selective
+        "0": 0.10,  # Increased ROI target to be more selective
     }
 
     # Optimal stoploss designed for the strategy.
@@ -272,6 +272,9 @@ class WarriorMomentum(IStrategy):
         """
         dataframe.loc[
             (
+                # Price filter: ignore cryptos above $0.90 USDT
+                (dataframe["close"] <= 0.90)
+                &
                 # Made daily chart requirement more lenient
                 (dataframe["strong_daily_1d"] == True)
                 &
@@ -377,9 +380,9 @@ class WarriorMomentum(IStrategy):
         previous_candle = dataframe.iloc[-2].squeeze()
 
         # Exit on first red candle only if profit is very minimal
-        # if (previous_candle["close"] < previous_candle["open"] and
-        #     current_profit < 0.005):  # Less than 0.5% profit
-        #     return "first_red_candle"
+        if (previous_candle["close"] < previous_candle["open"] and
+            current_profit < 0.005):  # Less than 0.5% profit
+            return "first_red_candle"
 
         # Exit on extension bar (large spike) - increased threshold
         candle_change = (last_candle["close"] - last_candle["open"]) / last_candle["open"]
