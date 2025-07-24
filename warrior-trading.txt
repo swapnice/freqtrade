@@ -1,0 +1,58 @@
+Almost all traders will agree that Momentum is one of the best trading strategies. Momentum is what day trading is all about.
+
+One of the most important things I realized as a beginner trader is that the only way to generate consistent profits is by finding stocks that are moving.
+
+If stocks aren’t moving, we can’t make money. As day traders we buy stocks with the intention of selling them at a higher price. The good news is that almost every single day there is a stock that will move 20-30%. This is a fact.
+
+The question is how do we find those stocks before they make the big move. The biggest realization I made that has led to my success is that the stocks that make the 20-30% moves all share a few technical indicators in common.
+
+By understanding the anatomy of a stock with home run potential you increase the likelihood you’ll be able to find them in real-time.
+Anatomy of a Momentum Stock
+
+Momentum Stocks all have a few things in common. If we scan 5000 stocks asking for only the following criteria to be true, we’ll often have a list of less than 10 stocks each day. These are the stocks that have the potential to move 20-30%. These are the stocks I trade to make a living as a trader.
+
+Criteria #1: Float of under 100 mil shares (see Float definition)
+
+Criteria #1: Strong Daily Charts (above the Moving Averages and with no nearby resistance).
+Criteria #2: High Relative Volume of at least 2x above average. (This compares the current volume for today to the average volume for this time of day. These all refer to the standard volume numbers, which are reset every night at midnight.)
+
+Criteria #4 is Optional: A fundamental catalyst such as a PR, Earnings, FDA Announcement, Activist Investors, etc. Stocks can also experience momentum without a fundamental catalyst. When this happens, it’s called a technical breakout.
+
+My Favorite Day Trading Chart Patterns
+Bull Flags are my absolute favorite charting pattern, in fact I like them so much I made an entire page dedicated to the Bull Flag Pattern.
+This pattern is something we see almost every single day in the market, and it offers low risk entries in strong stocks. The hard part for many beginner traders is finding these patterns in real-time.
+
+These stocks are easy to find using the stock scanners I have developed with Trade-Ideas. My Surging Up scanners immediately shows me where the highest relative volume in the market is.
+
+I simply review scanners alerts to identify the strong stocks at any given time of the day. As a pattern based trader, I look for patterns that support continued momentum. Scanners alone cannot find patterns on charts. This is where the trader must use their skill to justify each trade.
+
+Day Trading Strategies Pattern #1: Bull Flags
+With the Bull Flag Pattern, my entry is the first candle to make a new high after the breakout. So we can scan for the stocks squeezing up, forming the tall green candles of the Bull Flag, then wait for 2-3 red candles to form a pullback.
+The first green candle to make a new high after the pullback is my entry, with my stop at the low of the pullback. Typically we’ll see volume spike at the moment the first candle makes a new high.
+
+That is the tens of thousands of retail traders taking positions and sending their buying orders.
+
+One of the Best Trading Strategies
+The Trading Strategies can be used from 9:30-4pm but I find the mornings are almost always the best time to trade. I focus my trading from 9:30am – 11:30am.
+However, at any time during the day we can get a news spike that will suddenly bring a tremendous amount of volume into a stock. This stock which was of no interest earlier in the day is now a good candidate to trade on the first pull back.
+The first pull back will typically take the form of a bull flag. After 11:30am I prefer to only trade off the 5min chart. The 1min chart becomes too choppy in the mid-day and afternoon trading hours.
+
+Entry Checklist Summary
+Entry Criteria #1: Momentum Day Trading Chart Pattern (Bull Flag or Flat Top Breakout)
+Entry Criteria #2: You have a tight stop that supports a 2:1 profit loss ratio
+Entry Criteria #3: You have high relative volume (2x or higher) and ideally associated with a catalyst. Heavier volume means more people are watching.
+Entry Criteria #4: Low Float is preferred. I look for under 100mil shares, but under 20million shares is ideal. You can find the outstanding float with Trade-Ideasor eSignal.
+Exit Indicators
+Exit Indicator #1: I will sell 1/2 when I hit my first profit target. If I’m risking $100 to make $200, once I’m up $200 I’ll sell 1/2. I then adjust my stop to my entry price on the balance of my position
+Exit Indicator #2: If I haven’t already sold 1/2, the first candle to close red is an exit indicator. If I’ve already sold 1/2, I’ll hold through red candles as long as my breakeven stop doesn’t hit.
+Exit Indicator #3: Extension bar forces me to begin locking in my profits before the inevitable reversal begins. An extension bar is a candle that spikes up and instantly put my up $200,400 or more. When I’m lucky enough to have a stock spike up while I’m holding, I sell into the spike.
+
+Analyze Your Results
+
+All successful traders will have positive trading metrics. Trading is a career of statistics. You either have statistics that generate returns or losses.
+When I work with students I review their profit loss ratios (average winners vs average losers), and their percentage of success. This will tell me if they have the potential to be profitable, without even looking at their total P/L.
+Once you finish each week you have to analyze your results to understand your current trading metrics. The best traders keep meticulous trading records because they know they’ll be able to data mine these records in order to understand what they should to to improve their trading.
+Gift #1:  $1K to 8K In Just 1 Month Case Study
+Gift #2: Simple Beginner Day Trading Strategies
+In The Next 3 Days...
+Gift #3: 5 Steps To Building A Watch
