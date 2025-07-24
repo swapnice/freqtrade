@@ -87,7 +87,7 @@ class WarriorMomentum(IStrategy):
     stoploss = -0.1  # Loosened stop to allow for more volatility
 
     # Trailing stoploss
-    trailing_stop = True
+    trailing_stop = False
     trailing_stop_positive = 0.02
     trailing_stop_positive_offset = 0.03
     trailing_only_offset_is_reached = True
