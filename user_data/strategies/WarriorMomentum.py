@@ -79,7 +79,7 @@ class WarriorMomentum(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
     minimal_roi = {
-        "0": 0.10,  # Increased ROI target to be more selective
+        "0": 0.2,  # Increased ROI target to be more selective
     }
 
     # Optimal stoploss designed for the strategy.
@@ -145,25 +145,6 @@ class WarriorMomentum(IStrategy):
             },
         },
     }
-
-    def informative_pairs(self):
-        pairs = self.dp.current_whitelist()
-        informative_pairs = [(pair, "1d") for pair in pairs]
-        return informative_pairs
-
-    def populate_indicators_1d(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
-        dataframe["ema20"] = ta.EMA(dataframe, timeperiod=20)
-        dataframe["ema50"] = ta.EMA(dataframe, timeperiod=50)
-        dataframe["resistance"] = dataframe["high"].rolling(10).max().shift(1)
-        dataframe["daily_change_pct"] = (dataframe["close"] - dataframe["open"]) / dataframe["open"]
-        dataframe["volume_sma"] = dataframe["volume"].rolling(20).mean()
-        # Made daily strength criteria more lenient
-        dataframe["strong_daily"] = (
-            (dataframe["close"] > dataframe["ema20"]) |  # Changed AND to OR
-            (dataframe["close"] > dataframe["ema50"]) |
-            (dataframe["close"] < dataframe["resistance"] * 1.05)  # Allow closer to resistance
-        )
-        return dataframe
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         """
@@ -254,13 +235,6 @@ class WarriorMomentum(IStrategy):
         dataframe["htsine"] = hilbert["sine"]
         dataframe["htleadsine"] = hilbert["leadsine"]
 
-        # Merge informative
-        informative_1d = self.dp.get_pair_dataframe(pair=metadata["pair"], timeframe="1d")
-        informative_1d = self.populate_indicators_1d(informative_1d, metadata)
-        dataframe = merge_informative_pair(
-            dataframe, informative_1d, self.timeframe, "1d", ffill=True
-        )
-
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -274,9 +248,6 @@ class WarriorMomentum(IStrategy):
             (
                 # Price filter: ignore cryptos above $0.90 USDT
                 (dataframe["close"] <= 0.90)
-                &
-                # Made daily chart requirement more lenient
-                (dataframe["strong_daily_1d"] == True)
                 &
                 # Reduced volume requirement
                 (dataframe["volume_ratio"] >= self.volume_multiplier.value)
@@ -376,18 +347,18 @@ class WarriorMomentum(IStrategy):
         if len(dataframe) < 2:
             return None
 
-        last_candle = dataframe.iloc[-1].squeeze()
-        previous_candle = dataframe.iloc[-2].squeeze()
+        # last_candle = dataframe.iloc[-1].squeeze()
+        # previous_candle = dataframe.iloc[-2].squeeze()
 
         # Exit on first red candle only if profit is very minimal
-        if (previous_candle["close"] < previous_candle["open"] and
-            current_profit < 0.005):  # Less than 0.5% profit
-            return "first_red_candle"
+        # if (previous_candle["close"] < previous_candle["open"] and
+        #     current_profit < 0.005):  # Less than 0.5% profit
+        #     return "first_red_candle"
 
         # Exit on extension bar (large spike) - increased threshold
-        candle_change = (last_candle["close"] - last_candle["open"]) / last_candle["open"]
-        if candle_change > 0.08:  # 8% spike in single candle
-            return "extension_bar_spike"
+        # candle_change = (last_candle["close"] - last_candle["open"]) / last_candle["open"]
+        # if candle_change > 0.08:  # 8% spike in single candle
+        #     return "extension_bar_spike"
 
         # Exit on severe volume exhaustion with strong negative momentum
         # if (last_candle["volume_ratio"] < 0.2 and
