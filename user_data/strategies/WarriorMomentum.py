@@ -88,9 +88,9 @@ class WarriorMomentum(IStrategy):
 
     # Trailing stoploss
     trailing_stop = False
-    trailing_stop_positive = 0.02
-    trailing_stop_positive_offset = 0.03
-    trailing_only_offset_is_reached = True
+    # trailing_stop_positive = 0.02
+    # trailing_stop_positive_offset = 0.03
+    # trailing_only_offset_is_reached = True
 
     # Optimal timeframe for the strategy.
     timeframe = "5m"
