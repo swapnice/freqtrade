@@ -93,7 +93,7 @@ class WarriorMomentum(IStrategy):
     # trailing_only_offset_is_reached = True
 
     # Optimal timeframe for the strategy.
-    timeframe = "5m"
+    timeframe = "1m"
 
     # Run "populate_indicators()" only for new candle.
     process_only_new_candles = True
