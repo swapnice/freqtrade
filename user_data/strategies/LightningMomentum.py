@@ -84,7 +84,7 @@ class LightningMomentum(IStrategy):
 
     # Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    stoploss = -0.9  # Loosened stop to allow for more volatility
+    stoploss = -0.1  # Loosened stop to allow for more volatility
 
     # Trailing stoploss
     trailing_stop = False
@@ -100,7 +100,7 @@ class LightningMomentum(IStrategy):
 
     # These values can be overridden in the config.
     use_exit_signal = False # we aren't using exit trend because we are using stoploss only at a percentage of negative profit
-    exit_profit_only = True
+    exit_profit_only = False
     ignore_roi_if_entry_signal = False
 
     # Hyperoptable parameters - Made more lenient to generate trades
@@ -328,3 +328,24 @@ class LightningMomentum(IStrategy):
         ] = 1
 
         return dataframe
+
+    def custom_exit(
+        self,
+        pair: str,
+        trade: Trade,
+        current_time: datetime,
+        current_rate: float,
+        current_profit: float,
+        **kwargs,
+    ) -> Optional[str]:
+        dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
+        if len(dataframe) < 2:
+            return None
+
+        # Exit when trade is open for 30 minutes
+        if trade.open_date_utc:
+            time_elapsed = current_time - trade.open_date_utc
+            if time_elapsed >= timedelta(minutes=30):
+                return "30_minute_timeout"
+
+        return None

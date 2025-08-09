@@ -79,12 +79,12 @@ class WarriorMomentum(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
     minimal_roi = {
-        "0": 0.2,  # Increased ROI target to be more selective
+        "0": 0.1,  # Increased ROI target to be more selective
     }
 
     # Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    stoploss = -0.1  # Loosened stop to allow for more volatility
+    stoploss = -0.05  # Loosened stop to allow for more volatility
 
     # Trailing stoploss
     trailing_stop = False
@@ -343,7 +343,14 @@ class WarriorMomentum(IStrategy):
         current_profit: float,
         **kwargs,
     ) -> Optional[str]:
+        # Exit when trade is open for 30 minutes
+        if trade.open_date_utc:
+            time_elapsed = current_time - trade.open_date_utc
+            if time_elapsed >= timedelta(minutes=30):
+                return "30_minute_timeout"
+
         dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
+
         if len(dataframe) < 2:
             return None
 
