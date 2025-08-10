@@ -79,12 +79,12 @@ class WarriorMomentum(IStrategy):
     # Minimal ROI designed for the strategy.
     # This attribute will be overridden if the config file contains "minimal_roi".
     minimal_roi = {
-        "0": 0.1,  # Increased ROI target to be more selective
+        "0": 0.2,  # Increased ROI target to be more selective
     }
 
     # Optimal stoploss designed for the strategy.
     # This attribute will be overridden if the config file contains "stoploss".
-    stoploss = -0.05  # Loosened stop to allow for more volatility
+    stoploss = -0.1  # Loosened stop to allow for more volatility
 
     # Trailing stoploss
     trailing_stop = False
@@ -108,15 +108,15 @@ class WarriorMomentum(IStrategy):
     rsi_buy_min = IntParameter(30, 50, default=40, space="buy")
     rsi_buy_max = IntParameter(65, 85, default=80, space="buy")
     rsi_sell = IntParameter(75, 95, default=85, space="sell")
-    momentum_threshold = DecimalParameter(0.005, 0.02, default=0.01, space="buy")
+    momentum_threshold = DecimalParameter(0.005, 0.2, default=0.02, space="buy")
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
 
     # Optional order type mapping.
     order_types = {
-        "entry": "limit",
-        "exit": "limit",
+        "entry": "market",
+        "exit": "market",
         "stoploss": "market",
         "stoploss_on_exchange": False,
     }
@@ -346,13 +346,13 @@ class WarriorMomentum(IStrategy):
         # Exit when trade is open for 30 minutes
         if trade.open_date_utc:
             time_elapsed = current_time - trade.open_date_utc
-            if time_elapsed >= timedelta(minutes=30):
-                return "30_minute_timeout"
+            if time_elapsed >= timedelta(hours=12):
+                return "12_hour_timeout"
 
-        dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
+        # dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
 
-        if len(dataframe) < 2:
-            return None
+        # if len(dataframe) < 2:
+        #     return None
 
         # last_candle = dataframe.iloc[-1].squeeze()
         # previous_candle = dataframe.iloc[-2].squeeze()
