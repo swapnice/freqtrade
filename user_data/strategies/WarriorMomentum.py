@@ -108,7 +108,7 @@ class WarriorMomentum(IStrategy):
     rsi_buy_min = IntParameter(30, 50, default=40, space="buy")
     rsi_buy_max = IntParameter(65, 85, default=80, space="buy")
     rsi_sell = IntParameter(75, 95, default=85, space="sell")
-    momentum_threshold = DecimalParameter(0.005, 0.2, default=0.02, space="buy")
+    momentum_threshold = DecimalParameter(0.005, 0.2, default=0.2, space="buy")
 
     # Number of candles the strategy requires before producing valid signals
     startup_candle_count: int = 200
@@ -216,7 +216,7 @@ class WarriorMomentum(IStrategy):
         # Recent high for breakout detection
         dataframe["recent_high"] = dataframe["high"].rolling(20).max().shift(1)
         dataframe["recent_high_5"] = dataframe["high"].rolling(5).max().shift(1)
-        dataframe["recent_high_10"] = dataframe["high"].rolling(10).max().shift(1)
+        dataframe["recent_high_200"] = dataframe["high"].rolling(200).max().shift(1)
 
         # Bull flag pattern detection - made more lenient
         dataframe["consolidation"] = (
@@ -225,7 +225,7 @@ class WarriorMomentum(IStrategy):
         ) < 0.05  # Loosened consolidation requirement
 
         # Momentum indicators
-        dataframe["price_change_pct"] = (dataframe["close"] - dataframe["open"]) / dataframe["open"]
+        dataframe["price_change_pct"] = (dataframe["close"].shift(200) - dataframe["open"]) / dataframe["open"]
         dataframe["momentum_5"] = (dataframe["close"] - dataframe["close"].shift(5)) / dataframe["close"].shift(5)
 
         # Cycle Indicator
@@ -257,7 +257,7 @@ class WarriorMomentum(IStrategy):
                     # Bull flag: consolidation followed by breakout
                     (
                         (dataframe["consolidation"].shift(1) == True) &
-                        (dataframe["high"] > dataframe["recent_high_10"])
+                        (dataframe["high"] > dataframe["recent_high_200"])
                     )
                     |
                     # Flat top breakout: new high with volume
@@ -269,7 +269,7 @@ class WarriorMomentum(IStrategy):
                     # Simple momentum breakout
                     (
                         (dataframe["close"] > dataframe["ema9"]) &
-                        (dataframe["momentum_5"] > 0.01)
+                        (dataframe["momentum_5"] > self.momentum_threshold.value)
                     )
                 )
                 &
