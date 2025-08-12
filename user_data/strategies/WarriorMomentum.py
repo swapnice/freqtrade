@@ -108,6 +108,7 @@ class WarriorMomentum(IStrategy):
     rsi_buy_min = IntParameter(30, 50, default=40, space="buy")
     rsi_buy_max = IntParameter(65, 85, default=80, space="buy")
     rsi_sell = IntParameter(75, 95, default=85, space="sell")
+    # changed from 0.02 to 0.2 to restrict the number of trades to only the ones that are more likely to be profitable
     momentum_threshold = DecimalParameter(0.005, 0.2, default=0.2, space="buy")
 
     # Number of candles the strategy requires before producing valid signals
