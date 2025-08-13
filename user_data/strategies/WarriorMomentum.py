@@ -274,7 +274,7 @@ class WarriorMomentum(IStrategy):
                     )
                 )
                 &
-                # Reduced momentum requirement
+                # Increased momentum requirement
                 (dataframe["price_change_pct"] >= self.momentum_threshold.value)
                 &
                 # Wider RSI range
